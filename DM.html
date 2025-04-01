@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Énigme</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Résolvez l'énigme !</h1>
+        <p id="enigme"></p>
+        <input type="text" id="reponse" placeholder="Votre réponse">
+        <button onclick="verifierReponse()">Valider</button>
+        <p id="message"></p>
+        <button id="btn-reponse" onclick="afficherReponse()">Afficher la réponse</button>
+        <button id="btn-image" onclick="afficherImage()">Afficher l'image</button>
+        <img id="image-recompense" src="" alt="Récompense">
+        <button id="btn-suivant" onclick="passerEnigmeSuivante()">Suivant</button>
+    </div>
+    
+    <script>
+        let enigmes = [
+            { question: "Je suis petit le matin, grand le soir, et je disparais la nuit. Qui suis-je ?", reponse: "l'ombre", image: "ton-image1.jpg" },
+            { question: "Plus je suis chaud, plus je suis frais. Qui suis-je ?", reponse: "le pain", image: "ton-image2.jpg" },
+            { question: "Je peux être plein ou vide, mais je contiens toujours du vent. Qui suis-je ?", reponse: "un ballon", image: "ton-image3.jpg" },
+            { question: "On me prend sans me toucher, on me suit sans me voir. Qui suis-je ?", reponse: "le souffle", image: "ton-image4.jpg" }
+        ];
+        let indexEnigme = 0;
+        let reponseTrouvee = false;
+        let reponseMontree = false;
+
+        function chargerEnigme() {
+            document.getElementById("enigme").textContent = enigmes[indexEnigme].question;
+            document.getElementById("image-recompense").src = enigmes[indexEnigme].image;
+            document.getElementById("reponse").value = "";
+            document.getElementById("message").textContent = "";
+            document.getElementById("btn-reponse").style.display = "none";
+            document.getElementById("btn-image").style.display = "none";
+            document.getElementById("btn-suivant").style.display = "none";
+            document.getElementById("image-recompense").style.display = "none";
+            reponseTrouvee = false;
+            reponseMontree = false;
+            setTimeout(() => {
+                if (!reponseTrouvee) {
+                    document.getElementById("btn-reponse").style.display = "block";
+                }
+            }, 300000); // 5 minutes
+        }
+
+        function verifierReponse() {
+            let reponse = document.getElementById("reponse").value.toLowerCase();
+            let bonneReponse = enigmes[indexEnigme].reponse;
+            
+            if (reponse === bonneReponse) {
+                document.getElementById("message").textContent = "Bravo ! Voici votre récompense :";
+                document.getElementById("image-recompense").style.display = "block";
+                if (indexEnigme < enigmes.length - 1) {
+                    document.getElementById("btn-suivant").style.display = "block";
+                } else {
+                    document.getElementById("message").textContent += " Toutes les énigmes ont été résolues !";
+                }
+                reponseTrouvee = true;
+            } else {
+                document.getElementById("message").textContent = "Mauvaise réponse, essayez encore !";
+            }
+        }
+        
+        function afficherReponse() {
+            document.getElementById("message").textContent = "La réponse est : " + enigmes[indexEnigme].reponse;
+            reponseMontree = true;
+            document.getElementById("btn-image").style.display = "block";
+        }
+        
+        function afficherImage() {
+            document.getElementById("image-recompense").style.display = "block";
+            if (indexEnigme < enigmes.length - 1) {
+                document.getElementById("btn-suivant").style.display = "block";
+            } else {
+                document.getElementById("message").textContent += " Toutes les énigmes ont été résolues !";
+            }
+        }
+        
+        function passerEnigmeSuivante() {
+            if (indexEnigme < enigmes.length - 1) {
+                indexEnigme++;
+                chargerEnigme();
+            }
+        }
+        
+        chargerEnigme();
+    </script>
+</body>
+</html>
