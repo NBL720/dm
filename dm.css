@@ -37,7 +37,19 @@ button:hover {
     background-color: #3a5ca0;
 }
 
-#image-recompense, #btn-suivant { 
+#btn-suivant {
+    display: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+#image-recompense { 
     display: none; 
     margin-top: 20px; 
     width: 300px; 
