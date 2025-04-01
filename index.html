@@ -25,22 +25,22 @@
     <script>
         let enigmes = [
             { 
-                question: "De quoi parles-tu? (en général)", 
+                question: "Enigme 1: De quoi parles-tu? (en général)", 
                 reponse: "x", 
                 images: ["dm_p1.jpg", "dm_p2.jpg","dm_p3.jpg","dm_p4.jpg","dm_p5_1.jpg"] 
             },
             { 
-                question: "Dans un village, on dénombre 33 familles. Chaque famille possède 1, 2 ou 3 vélos. Cependant, il y a autant de familles possédant 1 vélo que de familles possédant 3 vélos. Combien y a-t-il de vélos dans le village?", 
+                question: "Enigme 2: Dans un village, on dénombre 33 familles. Chaque famille possède 1, 2 ou 3 vélos. Cependant, il y a autant de familles possédant 1 vélo que de familles possédant 3 vélos. Combien y a-t-il de vélos dans le village?", 
                 reponse: "66", 
                 images: ["dm_p5_2.jpg", "dm_p6.jpg","dm_p7.jpg"] 
             },
             { 
-                question: "Bali et Balaud sont sur un bateau, Bali tombe à l'eau. Qui est chauve? (Le texte est trompeur)", 
+                question: "Enigme 3: Bali et Balaud sont sur un bateau, Bali tombe à l'eau. Qui est chauve? (Le texte est trompeur)", 
                 reponse: "balaud", 
                 images: ["dm_p8.jpg","dm_p9.jpg","dm_p10.jpg","dm_p11.jpg"] 
             },
             { 
-                question: "P=NP? (démonstration attendue)", 
+                question: "Enigme 4: P=NP? (démonstration attendue)", 
                 reponse: " ", 
                 texte:"En réalite, je n'ai pas fait la fin du dm. (je faisais ce site)"
             }
@@ -63,7 +63,7 @@
                 if (!reponseTrouvee) {
                     document.getElementById("btn-reponse").style.display = "block";
                 }
-            }, 30000); // 5 minutes
+            }, 300000); // 5 minutes
         }
 
         function verifierReponse() {
