@@ -68,8 +68,12 @@
             let reponse = document.getElementById("reponse").value.toLowerCase();
             let bonneReponse = enigmes[indexEnigme].reponse;
             if (reponse === bonneReponse) {
+                if (indexEnigme!=3) {
                 document.getElementById("message").textContent = "Bien joué ! Voici une partie du dm :";
-                afficherImagesOuTexte();
+                afficherImagesOuTexte();                
+                } else {
+                    afficherImagesOuTexte();  
+                }
                 if (indexEnigme < enigmes.length - 1) {
                     document.getElementById("btn-suivant").style.display = "block";
                 } else {
