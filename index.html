@@ -10,12 +10,14 @@
     <div class="container">
         <h1>DM 17</h1>
         <h2>Nolann Bouissou--Labich</h2>
+        <p>Si les photos ne sont pas lisibles, demandez-moi la version papier.</p>
         <p id="enigme"></p>
         <input type="text" id="reponse" placeholder="Votre réponse">
         <button onclick="verifierReponse()">Valider</button>
         <p id="message"></p>
         <button id="btn-reponse" onclick="afficherReponse()">Afficher la réponse</button>
         <div id="images-container"></div>
+        <div id="text-container" style="display: none;"></div>
         <button id="btn-suivant" onclick="passerEnigmeSuivante()">Suivant</button>
     </div>
     
@@ -40,6 +42,7 @@
                 question: "P=NP? (démonstration attendue)", 
                 reponse: " ", 
                 images: [""] 
+                texte: "Félicitations ! Vous avez complété toutes les énigmes !"
             }
         ];
         let indexEnigme = 0;
@@ -52,6 +55,7 @@
             document.getElementById("message").textContent = "";
             document.getElementById("btn-reponse").style.display = "none";
             document.getElementById("btn-suivant").style.display = "none";
+            document.getElementById("text-container").style.display = "none";
             document.getElementById("images-container").innerHTML = "";
             reponseTrouvee = false;
             reponseMontree = false;
@@ -59,16 +63,15 @@
                 if (!reponseTrouvee) {
                     document.getElementById("btn-reponse").style.display = "block";
                 }
-            }, 300000); // 5 minutes
+            }, 30000); // 5 minutes
         }
 
         function verifierReponse() {
             let reponse = document.getElementById("reponse").value.toLowerCase();
             let bonneReponse = enigmes[indexEnigme].reponse;
-            
             if (reponse === bonneReponse) {
                 document.getElementById("message").textContent = "Bien joué ! Voici une partie du dm :";
-                afficherImages();
+                afficherImagesOuTexte();
                 if (indexEnigme < enigmes.length - 1) {
                     document.getElementById("btn-suivant").style.display = "block";
                 } else {
@@ -81,22 +84,27 @@
         }
         
         function afficherReponse() {
-            document.getElementById("message").textContent = "La réponse est : " + enigmes[indexEnigme].reponse;
-            reponseMontree = true;
-            afficherImages();
+            document.getElementById("message").textContent = "La réponse était : " + enigmes[indexEnigme].reponse;
+            afficherImagesOuTexte();
+            document.getElementById("btn-suivant").style.display = "block";
         }
         
-        function afficherImages() {
-            let imagesContainer = document.getElementById("images-container");
-            imagesContainer.innerHTML = "";
-            enigmes[indexEnigme].images.forEach(src => {
-                let img = document.createElement("img");
-                img.src = src;
-                img.alt = "Récompense";
-                img.onclick = () => afficherEnPleinEcran(src);
-                imagesContainer.appendChild(img);
-            });
-        }
+        function afficherImagesOuTexte() {
+            if (enigmes[indexEnigme].images) {
+                let imagesContainer = document.getElementById("images-container");
+                imagesContainer.innerHTML = "";
+                enigmes[indexEnigme].images.forEach(src => {
+                    let img = document.createElement("img");
+                    img.src = src;
+                    img.alt = "Récompense";
+                    img.onclick = () => afficherEnPleinEcran(src);
+                    imagesContainer.appendChild(img);
+                });
+            } else if (enigmes[indexEnigme].texte) {
+                let textContainer = document.getElementById("text-container");
+                textContainer.textContent = enigmes[indexEnigme].texte;
+                textContainer.style.display = "block";
+            }
         
         function passerEnigmeSuivante() {
             if (indexEnigme < enigmes.length - 1) {
